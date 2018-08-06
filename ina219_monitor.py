@@ -91,18 +91,23 @@ def updates(ina):
     before = now
     averagecurrent = mah*3600/elapsed
     main_loop.draw_screen()
-    updates = [( u'start: \t'.expandtabs(5)), 
-               ( time.strftime('%Y-%m-%d %H:%M:%S \n', time.localtime(start)).expandtabs(5)),
-               ( u'elapsed: \t'.expandtabs(5)),
-               ( time.strftime("%H:%M:%S\n", time.gmtime(elapsed)).expandtabs(5))]
+    #
+    # TODO Elasped Time currently wraps at 24 need to fix 
+    #
+    updates = [(u'start: \t'.expandtabs(5)),
+               (time.strftime('%Y-%m-%d %H:%M:%S \n',
+                              time.localtime(start)).expandtabs(5)),
+               (u'elapsed: \t'.expandtabs(5)),
+               (time.strftime("%H:%M:%S\n",
+                              time.gmtime(elapsed)).expandtabs(5))]
     updates.append(('{:<10}{:<10.2f}{:<10}{:<10.2f}{:<10}{:10.2f}\n'.
                     format('current', current, 'max', maxc, 'min', minc)))
     updates.append(('{:<10}{:<10.2f}{:<10}{:<10.2f}{:<10}{:10.2f}\n'.
-                 format('volts', voltage, 'max', maxv, 'min', minv)))
+                    format('volts', voltage, 'max', maxv, 'min', minv)))
     updates.append(('{:<10}{:<10.2f}{:<20}{:<10.2f}\n'.
-                 format('mAH', mah, 'avg current', averagecurrent)))
+                    format('mAH', mah, 'avg current', averagecurrent)))
     updates.append(('{:<10}{:<15}{:<10}{:<10}\n'.
-                 format('logfile', LOGFILE, 'size', filesize)))
+                    format('logfile', LOGFILE, 'size', filesize)))
 
     return(updates)
 
@@ -115,7 +120,8 @@ def handle_input(key):
 
 ina = INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS, log_level=logging.INFO)
 monitor_box = create_Monitorbox()
-main_loop = urwid.MainLoop(create_gui(monitor_box), palette, unhandled_input=handle_input)
+main_loop = urwid.MainLoop(create_gui(monitor_box), palette,
+                           unhandled_input=handle_input)
 # Open log file and write header
 file = open(LOGFILE, 'a')
 file.write("time , current, voltage , milliamp hours\n")
@@ -157,4 +163,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
