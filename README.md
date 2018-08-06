@@ -26,8 +26,21 @@ VIN+ and VIN- on the module connect to the high side of your load.  You can conn
 | :--:                                           |
 | *Example setup with test load*                 |
 
-Once you have wired it up it's a good idea to test it.  Again Adafruit has an excellent tutorial [here](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c) on how to use i2cdetect to make sure you setup is correct. If it's working correctly you should see something like this
+Once you have wired it up it's a good idea to test it.  Again Adafruit has an excellent tutorial [here](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c) on how to install and use i2cdetect to make sure you setup is correct. If it's working correctly you should see something like this
 
+```
+sudo i2cdetect -y 1
+
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --
+```
 
 ### Software depedencies 
 
